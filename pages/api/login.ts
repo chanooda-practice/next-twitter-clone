@@ -13,14 +13,17 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     },
   });
   if (user) {
-    const isRightPassword = await verifyPassword(password, user?.salt, user?.password);
+    const isRightPassword = await verifyPassword(
+      password,
+      user?.salt,
+      user?.password
+    );
     if (isRightPassword) {
       console.log(user?.salt);
       req.session.user = {
         id: Number(user?.id),
       };
       await req.session.save();
-      console.log("asdkasldjasdj");
       return res.json({
         ok: true,
       });
