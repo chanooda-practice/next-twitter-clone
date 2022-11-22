@@ -15,7 +15,8 @@ export default function Home() {
   const router = useRouter();
   const {} = useUser();
   const [isModal, setModal] = useState(false);
-  const [mutate, { loading, data }] = useMutation<defaultResponse<Twit>>("/api/twit");
+  const [mutate, { loading, data }] =
+    useMutation<defaultResponse<Twit>>("/api/twit");
   const { data: twits } = useSWR<defaultResponse<TwitsResponse[]>>("/api/twit");
   const { register, handleSubmit } = useForm<TwitForm>();
   const onValid = (formData: TwitForm) => {
@@ -66,7 +67,11 @@ export default function Home() {
         <form onSubmit={handleSubmit(onValid)}>
           <div className="fixed w-full h-full top-0  bg-[rgba(0,0,0,0.4)] shadow-2xl left-0 px-8 flex items-end">
             <div className="w-full h-[340px] rounded-lg bg-white p-4 flex flex-col items-end">
-              <button type="button" onClick={() => setModal(false)} className="mb-4 mr-1 text-xl">
+              <button
+                type="button"
+                onClick={() => setModal(false)}
+                className="mb-4 mr-1 text-xl"
+              >
                 X
               </button>
               <textarea
@@ -74,7 +79,9 @@ export default function Home() {
                 rows={7}
                 className="border border-blue-400 w-full resize-none rounded-lg outline-none p-4 text-gray-600 text-lg"
               ></textarea>
-              <button className="px-4 py-2 bg-blue-400 text-white rounded-md mt-2 ">트윗</button>
+              <button className="px-4 py-2 bg-blue-400 text-white rounded-md mt-2 ">
+                트윗
+              </button>
             </div>
           </div>
         </form>
