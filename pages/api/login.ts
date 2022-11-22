@@ -28,12 +28,12 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         ok: true,
       });
     } else {
-      res.json({
+      res.status(400).json({
         ok: false,
       });
     }
   } else {
-    res.json({
+    res.status(400).json({
       ok: false,
     });
   }

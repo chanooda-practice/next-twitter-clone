@@ -8,7 +8,7 @@ declare module "iron-session" {
   }
 }
 const cookieOptions = {
-  cookieName: "carrotSession",
+  cookieName: "twitterSession",
   password:
     ";a;kjasdifwoefapo;jdc;alnvk;aejoirp23875339mv0354871v-209875v-q02348cmruwqijf90e8wfcm",
   secure: process.env.NODE_ENV === "production",

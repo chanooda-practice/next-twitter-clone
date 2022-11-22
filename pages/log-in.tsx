@@ -14,11 +14,14 @@ interface LoginForm {
 
 export default function LogIn() {
   const router = useRouter();
+  const [errMessage, setErrorMessage] = useState("");
+  console.log(errMessage);
   const [type, setType] = useState("email");
   const toggleLoginType = () => {
     setType((prev) => (prev === "email" ? "phone" : "email"));
   };
-  const [mutate, { data, loading }] = useMutation<defaultResponse>("/api/login");
+  const [mutate, { data, loading }] =
+    useMutation<defaultResponse>("/api/login");
   const {
     register,
     handleSubmit,
@@ -30,8 +33,12 @@ export default function LogIn() {
     }
   };
   useEffect(() => {
-    if (data?.ok) {
+    if (data && data?.ok) {
+      setErrorMessage("");
       router.push("/");
+    }
+    if (data && !data?.ok) {
+      setErrorMessage("알맞은 정보가 아닙니다.");
     }
   }, [data, router]);
   return (
@@ -62,7 +69,10 @@ export default function LogIn() {
             errorMessage={errors.password?.message}
           />
           <div>
-            <p onClick={toggleLoginType} className="text-blue-400 text-right cursor-pointer">
+            <p
+              onClick={toggleLoginType}
+              className="text-blue-400 text-right cursor-pointer"
+            >
               {type === "email" ? "전화번호로 로그인" : "이메일로 로그인"}
             </p>
           </div>
@@ -73,11 +83,14 @@ export default function LogIn() {
           className="w-full px-4 py-2 bg-blue-400 text-white rounded-md mt-8 cursor-pointer"
         />
       </form>
-      <Link href="/create-account">
-        <a className="mt-4 block float-right hover:underline">
-          계정이 없으신가요? 회원가입하러 가기
-        </a>
-      </Link>
+      <div className="mt-4 flex justify-between items-center">
+        {errMessage && <p className="text-red-500">{errMessage}</p>}
+        <Link href="/create-account">
+          <a className=" block float-right hover:underline ml-auto">
+            계정이 없으신가요? 회원가입하러 가기
+          </a>
+        </Link>
+      </div>
     </div>
   );
 }

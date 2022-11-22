@@ -34,7 +34,10 @@ export default function Home() {
     <div className="mt-14">
       <div>
         {twits?.data?.map((twit) => (
-          <div className="flex flex-col gap-2  border-b border-gray-200 p-2">
+          <div
+            key={twit.id}
+            className="flex flex-col gap-2  border-b border-gray-200 p-2"
+          >
             <div>{twit.user.name}</div>
             <div>{twit.text}</div>
             <div className="flex justify-end items-center gap-1">
